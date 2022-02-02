@@ -1,6 +1,6 @@
 class eSprite {
-    
-     /**
+
+    /**
      * Создание экземпляра eSprite.
      *
      * @constructor
@@ -11,7 +11,7 @@ class eSprite {
      * @param {string} axis - ось по которой реализуется движение (x/y) (можно задать через data-src-axis)
      */
     
-    constructor(id, format, limit, sources, axis) {
+    init(id, format, limit, sources, axis) {
         if (id === undefined)
             console.error('eSprite: not found id for element');
         if (format === undefined)
@@ -31,7 +31,7 @@ class eSprite {
 
         this.w = this.container.offsetWidth;
         this.h = this.container.offsetHeight;
-        
+
         let tmp;
         if (limit === undefined) {
             tmp = this.container.getAttribute("data-src-limit");
@@ -54,6 +54,14 @@ class eSprite {
         this.events();
     }
 
+    constructor(id, format, limit, sources, axis) {
+        var img = document.getElementById(id);
+        var self = this;
+        window.addEventListener("load", function(event) {
+            self.init(id, format, limit, sources, axis);
+        });
+    }
+
     events() {
         let self = this;
         this.container.addEventListener("mouseover", function (event) {
@@ -70,12 +78,13 @@ class eSprite {
 
     part_calculate(event) {
         let x, part;
-        if(this.axis === 'x'){
+        if (this.axis === 'x') {
             x = event.offsetX === undefined ? event.layerX : event.offsetX;
             part = Math.round((x / this.w) * this.limit);
-        }else{
+        } else {
             x = event.offsetY === undefined ? event.layerY : event.offsetY;
             part = Math.round((x / this.h) * this.limit);
+            console.log(part);
         }
         this.part = (part > this.limit) ? this.limit : part;
     }
@@ -105,6 +114,7 @@ class eSprite {
     }
 
     start() {
+
         var self = this;
         var i = 0;
         this.moves = false;
@@ -118,9 +128,9 @@ class eSprite {
                 }, 50 * i);
             }(i));
         }
+
     }
 }
 
 let block1 = new eSprite('block1');
 let block2 = new eSprite('block2');
-
