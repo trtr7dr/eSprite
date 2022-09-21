@@ -133,3 +133,9 @@ class eSprite {
 }
 
 // let a360_1 = new eSprite('a360_1', '.webp', 50);
+//<div class="esprites" id="idelement" data-src-sources="/path_to_folder/">
+//                   <img src="path_to_first_image.format" class="{{name}}_{{num}}_num{{num}} esp{{num}}" width="100%">
+//                   @for($i = ...; $i < ...; $i++)
+//                   <img src="/path_to_folder/{{$i}}.format" class="{{name}}_{{num}}_num{{$i}} esp{{num}}" style="display: none" width="100%">
+//                   @endfor
+//</div>
